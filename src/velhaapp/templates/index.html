@@ -1,18 +1,9 @@
 {% extends "layout.html" %}
+
+
+
 {% block content %}
-  <div class="row">
-    <div class="col s4 ">0</div>
-    <div class="col s4">1</div>
-    <div class="col s4">2</div>
-  </div>
-  <div class="row">
-    <div class="col s4">3</div>
-    <div class="col s4">4</div>
-    <div class="col s4">5</div>
-  </div>
-  <div class="row">
-    <div class="col s4">6</div>
-    <div class="col s4">7</div>
-    <div class="col s4">8</div>
-  </div>
+  <script src="{{url_for('static', filename='js/stage.web.js')}}"></script>
+  <script src="{{url_for('static', filename='js/example.js')}}"></script>
+  <script src="{{url_for('static', filename='js/app.js')}}"></script>
 {% endblock %}

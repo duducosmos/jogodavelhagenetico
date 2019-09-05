@@ -15,9 +15,8 @@
   {% endblock%}
   <script type="text/jscript">
     $(document).ready(function(){
-      $('select').formSelect();
-      $('.datepicker').datepicker();
       $('.sidenav').sidenav();
+      $('.parallax').parallax();
     });
   </script>
 </head>
@@ -41,7 +40,7 @@
       <div id="content" class="container">
          <br>
          <br>
-         {% block content %} {% endblock %}
+            {% block content %} {% endblock %}
       </div>
     </div>
   </div>
