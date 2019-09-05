@@ -104,6 +104,11 @@ class JogadorGenetico:
 
         return ps
 
+    def reiniciar(self):
+        self._no_atual = self._arvore
+        self._fim = 0
+        self._inicio = 0
+
     def jogar_em(self, tabuleiro):
         """
         Retorna uma posição a ser jogada a partir de um estado do tabuleiro.

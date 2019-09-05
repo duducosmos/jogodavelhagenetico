@@ -14,12 +14,15 @@ setup(
     author='Eduardo S. Pereira',
     author_email='pereira.somoza@gmail.com',
     packages=find_packages("src"),
-    package_dir={"jogodavelhagenetico":"src/jogodavelhagenetico"},
-    package_data={"jogodavelhagenetico":["modelo/*.pkl", "modelo/*.npy", ]},
+    package_dir={"":"src/"},
+    package_data={"":["modelo/*.pkl", "modelo/*.npy", "static/*", "templates/*"]},
     description="Genetic Algorithm to play tic tac toe",
     lond_description=read("README.md"),
     long_description_content_type="text/markdown",
     url="https://github.com/duducosmos/pygenec",
     include_package_data=True,
-    install_requires=["numpy", "pathos", "matplotlib", "pygenec"]
+    zip_safe=False,
+    install_requires=["numpy", "pathos", "matplotlib", "pygenec",
+                      "flask", "flask-socketio"],
+    entry_points = {"console_scripts":["jogodavelha = velhaapp.__main__:main"]},
 )

@@ -49,7 +49,7 @@ class ArvoreJogoDaVelha:
         return self._jogador
 
     @jogador.setter
-    def _set_jogador(self, jogador):
+    def jogador(self, jogador):
         '''
         Define o valor do jogador no nó.
         '''

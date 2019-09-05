@@ -34,6 +34,18 @@ from .jogadorgenetico import JogadorGenetico
 from .ferramentas import ferramentas as frt
 
 
+def salvar_probabilidades(saida, populacao, cromossomos, bits):
+
+    def valores(populacao):
+        bx = hsplit(populacao, cromossomos)
+        const = 2 ** bits - 1
+        const = 1.0 / const
+        x = [const * binarray2int(xi) for xi in bx]
+        x =  concatenate(x).T
+        return x
+
+    x = valores(populacao)
+    save(saida, x)
 
 def main(arvore_velha, dir_pop, dir_fig):
     '''
