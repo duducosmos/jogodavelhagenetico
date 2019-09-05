@@ -10,7 +10,7 @@ from .tela import Tela
 from .controle import Controle
 from .jogadores import Jogadores
 
-def jogo(stdscr):
+def main(stdscr):
     posicoes = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
 
     controle = Controle(stdscr=stdscr)
@@ -54,7 +54,6 @@ def jogo(stdscr):
             controle.pos_y = 0
             controle.pos_x = 0
             jogadores.vencedor = None
-            jogadores.JOGADOR_O.reiniciar()
             jogadores.fim_de_partida = False
             tela.reiniciar_tela()
 
@@ -78,6 +77,6 @@ def jogo(stdscr):
             controle.cursor()
 
 
-def main():
+if __name__ == "__main__":
     initscr()
-    wrapper(jogo)
+    wrapper(main)
