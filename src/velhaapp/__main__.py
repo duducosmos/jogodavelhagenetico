@@ -30,6 +30,11 @@ def jogo(stdscr):
             jmaqui = False
             jogadores.jogar()
             tela.tabuleiro(controle)
+            if jogadores.fim_de_partida is True:
+                if jogadores.vencedor == jogadores.marcacao_humano:
+                    jogador_humano += 1
+                if jogadores.vencedor == jogadores.marcacao_maquina:
+                    jogador_maquina += 1
 
         controle.espaco_do_tabuleiro()
         if jogadores.fim_de_partida is False:
@@ -38,11 +43,11 @@ def jogo(stdscr):
                 jmaqui = True if jogadores.marcacao_humano == "o" else False
 
             if jogadores.fim_de_partida is True:
-
                 if jogadores.vencedor == jogadores.marcacao_humano:
                     jogador_humano += 1
                 if jogadores.vencedor == jogadores.marcacao_maquina:
                     jogador_maquina += 1
+
 
         if controle.entrada == 'h':
             tela.ajuda()
