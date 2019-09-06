@@ -28,8 +28,8 @@ class Jogadores(object):
 
         POPX = load(POPULACAO_NUM_X)
         POPO = load(POPULACAO_NUM_O)
-        self._JOGADOR_X = JogadorGenetico(POPX[-1,:], 1, MAPA)
-        self.JOGADOR_O = JogadorGenetico(POPO[-1,:], -1, MAPA)
+        self._jogador_x = JogadorGenetico(POPX[-1,:], 1, MAPA)
+        self._jogador_o = JogadorGenetico(POPO[-1,:], -1, MAPA)
 
     def jogador(self):
         if self.posicoes[self.controle.pos_y][self.controle.pos_x] == " ":
@@ -42,8 +42,12 @@ class Jogadores(object):
         tmp = array(self.posicoes)
         tabuleiro[tmp == "o"] = -1
         tabuleiro[tmp == "x"] = 1
-        j, i = self.JOGADOR_O.jogar_em(tabuleiro)
-        self.posicoes[j][i] = "o"
+        i, j = self._jogador_o.jogar_em(tabuleiro)
+        self.posicoes[i][j] = "o"
+
+    def reiniciar_robo(self):
+        self._jogador_x.reiniciar()
+        self._jogador_o.reiniciar()
 
     def __total_alinhado(self, linha):
         num_x = linha.count("x")

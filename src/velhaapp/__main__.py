@@ -35,18 +35,7 @@ def jogo(stdscr):
                     jogador_o += 1
 
         if controle.entrada == "y":
-            """
-            # Gera o bug de referência
-            posicoes = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
-            controle.pos_y = 0
-            controle.pos_x = 0
-            jogadores.vencedor = None
-            jogadores.fim_de_partida = False
-            tela.reiniciar_tela()
-            """
 
-            #Adequado para poupar memória ao
-            #longo da execução prolongada do programa
             for i in range(3):
                 for j in range(3):
                     posicoes[i][j] = " "
@@ -54,19 +43,11 @@ def jogo(stdscr):
             controle.pos_y = 0
             controle.pos_x = 0
             jogadores.vencedor = None
-            jogadores.JOGADOR_O.reiniciar()
+            jogadores.reiniciar_robo()
             jogadores.fim_de_partida = False
             tela.reiniciar_tela()
 
-            """
-            #Cria novos objetos do jogo a cada reinicialização da partida
-            #Ao longo do tempo poderá gerar muito lixo na memória
-            posicoes = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
-            controle = Controle(stdscr=stdscr)
-            tela = Tela(stdscr=stdscr, posicoes=posicoes)
-            jogadores = Jogadores(controle=controle, posicoes=posicoes)
-            tela.reiniciar_tela()
-            """
+
 
         if controle.entrada == 'h':
             tela.ajuda()
