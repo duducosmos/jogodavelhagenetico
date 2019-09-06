@@ -22,6 +22,9 @@ class Jogadores(object):
         self.posicoes = posicoes
         self.fim_de_partida = False
         self._vencedor = None
+        self._marcacao_humano = None
+        self._jogar = True
+
         MAPA = None
         with open(ARVORE, 'rb') as pickin:
             MAPA = pickle.load(pickin)
@@ -31,9 +34,23 @@ class Jogadores(object):
         self._jogador_x = JogadorGenetico(POPX[-1,:], 1, MAPA)
         self._jogador_o = JogadorGenetico(POPO[-1,:], -1, MAPA)
 
+    @property
+    def marcacao_humano(self):
+        return "x" if self._marcacao_humano == 1 else "o"
+
+    @property
+    def marcacao_maquina(self):
+        return "x" if self._marcacao_humano == -1 else "o"
+
+    @marcacao_humano.setter
+    def marcacao_humano(self, marc):
+        marc = 1 if marc == "x" else -1
+        self._marcacao_humano = marc
+
     def jogador(self):
         if self.posicoes[self.controle.pos_y][self.controle.pos_x] == " ":
-            self.posicoes[self.controle.pos_y][self.controle.pos_x] = "x"
+            marc = "x" if self._marcacao_humano == 1 else "o"
+            self.posicoes[self.controle.pos_y][self.controle.pos_x] = marc
             return True
         return False
 
@@ -42,8 +59,13 @@ class Jogadores(object):
         tmp = array(self.posicoes)
         tabuleiro[tmp == "o"] = -1
         tabuleiro[tmp == "x"] = 1
-        i, j = self._jogador_o.jogar_em(tabuleiro)
-        self.posicoes[i][j] = "o"
+        if self._marcacao_humano == 1:
+            i, j = self._jogador_o.jogar_em(tabuleiro)
+        else:
+            i, j = self._jogador_x.jogar_em(tabuleiro)
+
+        self.posicoes[i][j] = "o" if self._marcacao_humano == 1 else "x"
+        return True
 
     def reiniciar_robo(self):
         self._jogador_x.reiniciar()
@@ -110,17 +132,26 @@ class Jogadores(object):
         return False
 
     def jogar(self):
-        jogou = self.jogador()
-        self.fim_de_partida = self.ganhador()
 
-        if jogou is True and self.fim_de_partida is False:
-            self.robo()
+        jogador1, jogador2 = (self.jogador, self.robo) \
+                             if self._marcacao_humano == 1 else \
+                             (self.robo, self.jogador)
+
+        if self._jogar == True:
+            self._jogar = jogador1()
             self.fim_de_partida = self.ganhador()
 
-    def _get_vencedor(self):
+        cond = self._marcacao_humano == -1 and self.fim_de_partida is False \
+               or self._jogar == True and self.fim_de_partida is False
+
+        if cond:
+            self._jogar = jogador2()
+            self.fim_de_partida = self.ganhador()
+
+    @property
+    def vencedor(self):
         return self._vencedor
 
-    def _set_vencedor(self, vencedor):
+    @vencedor.setter
+    def vencedor(self, vencedor):
         self._vencedor = vencedor
-
-    vencedor = property(_get_vencedor, _set_vencedor)
