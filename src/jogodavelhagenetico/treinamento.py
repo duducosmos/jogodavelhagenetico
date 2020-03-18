@@ -209,3 +209,7 @@ def main(arvore_velha, dir_pop, dir_fig):
                                                         tamanho_populacao,
                                                         evolucao.geracao,
                                                         int(LIMIAR * 100)))
+
+
+
+ 
